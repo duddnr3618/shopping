@@ -9,7 +9,7 @@ Client -> dto/vo -> controller -> dto ->service -> dto -> repository
 
 *서버 포트 설정
 1.application.properties 에 등록
-server.port=9696
+server.port=8001
 
 -----------------------------------------------------------
 
@@ -78,12 +78,24 @@ spring.datasource.password=
 	
 	private LocalDateTime createDate;
 
-	5.Repository 생성 <인터페이스> : JpaRepository< 테이블 , PK의자료형 > 를 상속해서 생성	
+
+	JPA : java persistence API
+-ORM : Object Relational Mapping 
+	: Java Object ---> ORM ---> DB(Relational DataBase) : 자바와 DB를 맵핑시켜준다.
+-장점 : 특정데이터베이스에 종속되지 않음 / 객체지향적으로 설계가능 (직관적,비즈니스로직) / 유지보수 및 생산성 향상
+-단점 : 복잡한쿼리를 처리하기 쉽지 않음 / 성능저하 ->자동으로 쿼리를 생성하여 의도하지 않는 쿼리발생
+
+-동작원리 : Entity Manager Factoy --> (create) -->Entity Manager --> (operation) -->Entity
+Entity : 데이터베이스의 테이블에 대응하는 클래스 (어노테이션을 붙여서 관리) 
+			    요청이 들어오면 엔티티매니저팩토리부터 엔티티매니저 생성
+	
+5.Repository 생성 <인터페이스> : JpaRepository< 테이블 , PK의자료형 > 를 상속해서 생성	
 	findAll() : 테이블의 전체 레코드를 검색
 	findId(1) : 레코드 하나	-> select * from question where id = 1
 	save() : insert , update
 	delete() : delete
 	count() : 테이블의 레코드의 총 갯수
+	
 	
 	----------------------------------------------
 	
